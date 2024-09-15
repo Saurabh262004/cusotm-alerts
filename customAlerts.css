@@ -1,0 +1,94 @@
+:root{
+  --alertColor: #c28af0;
+  --blockPageColor: #0000003a;
+  --btnActiveColor: #00000022;
+  --alertTextSize: 2vw;
+  --textColor: #111;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  font-size: 1.1vw;
+  font-family:'Segoe UI' serif;
+}
+
+.CustomAlert.container{
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--blockPageColor);
+  color: var(--textColor);
+  flex-flow: row wrap;
+}
+
+.CustomAlert.alert.in{
+  display: block;
+  position: absolute;
+  background-color: var(--alertColor);
+  color: var(--textColor);
+  animation: alert 0.3s ease;
+  transition: ease 0.3s;
+}
+
+.alert-txt{
+  display: block;
+  position: absolute;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  width: 90%;
+  text-align: center;
+  max-height: 50%;
+  overflow-y: hidden;
+  font-size: var(--alertTextSize);
+  color: var(--textColor);
+}
+
+.CustomAlert.btn-container{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.CustomAlert.btn{
+  display: block;
+  position: relative;
+  background-color: transparent;
+  color: var(--textColor);
+  border: solid 0.2vw #161616;
+  width: 20%;
+  aspect-ratio: 5/3;
+  top: 30%;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: cubic-bezier(0.48,-0.01, 0.55, 0.7) 0.12s;
+
+  &:hover{
+    background-color: aliceblue;
+    border: 0.2vw solid aliceblue;
+    top: 26%;
+    box-shadow: #161616 0 0.5vw 0 0;
+    transition: cubic-bezier(0.48,-0.01, 0.55, 0.7) 0.12s;
+  }
+
+  &:active{
+    background-color: var(--btnActiveColor);
+    top: 30%;
+    box-shadow: none;
+    transition: cubic-bezier(0.48,-0.01, 0.55, 0.7) 0.08s;
+  }
+}
