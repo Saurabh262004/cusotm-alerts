@@ -1,5 +1,3 @@
-// the css is important please don't just pickup the script...
-
 let customAlert;
 
 class Alert {
