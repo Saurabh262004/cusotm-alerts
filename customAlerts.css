@@ -25,6 +25,7 @@
   background-color: var(--blockPageColor);
   color: var(--textColor);
   flex-flow: row wrap;
+  z-index: 9999999;
 }
 
 .CustomAlert.alert.in{
