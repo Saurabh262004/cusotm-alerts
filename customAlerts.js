@@ -15,6 +15,7 @@ class Alert {
     main.id = 'ca-main';
     alert_txt.className = 'CustomAlert alert-txt';
     alert_txt.innerHTML = this.params.alert_txt;
+    // alert_txt.style.fontSize = inputs.textSize;
     btn_container.className = 'CustomAlert btn-container';
 
     alert.className = 'CustomAlert alert in';
@@ -39,10 +40,6 @@ class Alert {
       btn.innerHTML = btn_name;
       btn_container.appendChild(btn);
     }
-  
-    let root = document.querySelector(':root');
-    root.style.setProperty('--alertColor', inputs.bgColor);
-    root.style.setProperty('--textColor', inputs.textColor);
   
     alert.appendChild(alert_txt);
     alert.appendChild(btn_container);
@@ -263,6 +260,11 @@ class CustomAlertClass {
       console.error('could not find an alert with id ' + alert_id + ', please check for spelling errors');
       return false;
     }
+
+    let root = document.querySelector(':root');
+    root.style.setProperty('--alertColor', this.alerts[id_location].params.bgColor);
+    root.style.setProperty('--textColor', this.alerts[id_location].params.textColor);
+    root.style.setProperty('--alertTextSize', this.alerts[id_location].params.textSize);
 
     document.getElementsByTagName('body')[0].appendChild(this.alerts[id_location].DOM);
     this.active = true;

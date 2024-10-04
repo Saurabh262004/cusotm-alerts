@@ -2,8 +2,8 @@
   --alertColor: #c28af0;
   --blockPageColor: #0000003a;
   --btnActiveColor: #00000022;
-  --alertTextSize: 2vw;
   --textColor: #111;
+  --alertTextSize: 2em;
 }
 
 *{
@@ -45,9 +45,9 @@
   margin-top: 2%;
   width: 90%;
   text-align: center;
+  font-size: var(--alertTextSize);
   max-height: 50%;
   overflow-y: hidden;
-  font-size: var(--alertTextSize);
   color: var(--textColor);
 }
 
