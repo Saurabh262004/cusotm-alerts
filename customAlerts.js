@@ -3,7 +3,6 @@ let customAlert;
 class Alert {
   constructor(inputs) {
     this.params = inputs;
-    console.log(this.params);
   
     let
     LU = inputs.lengthUnit,
@@ -48,7 +47,6 @@ class Alert {
     alert.appendChild(alert_txt);
     alert.appendChild(btn_container);
     main.appendChild(alert);
-    console.log(main);
     this.DOM = main;
   }
 }
@@ -58,14 +56,15 @@ class CustomAlertClass {
     if (customAlert) {
       throw new Error('CustomAlertClass already has an instance');
     }
+
     this.alerts = [];
     this.alert_ids = [];
     this.results = [];
     this.active = false;
   }
 
-  new = (size, position, bgColor, textColor, buttons, roundedCorners, id, lengthUnit, alert_txt, textSize) => {
-    let rawInputs = [size, position, bgColor, textColor, buttons, roundedCorners, id, lengthUnit, alert_txt, textSize];
+  new = (size, position, bgColor, textColor, buttons, roundedCorners, id, lengthUnit, alert_txt, textSize, callback) => {
+    let rawInputs = [size, position, bgColor, textColor, buttons, roundedCorners, id, lengthUnit, alert_txt, textSize, callback];
     if (!this.check(rawInputs)) {
       return false;
     }
@@ -198,6 +197,12 @@ class CustomAlertClass {
       }
     }
 
+    // callback check
+    if (inp[10] && (!inp[10] instanceof Function)) {
+      success = false;
+      console.error('provided callback is not a function. please provide a valid function as callback or leave the parameter empty');
+    }
+
     return success;
   }
 
@@ -231,6 +236,7 @@ class CustomAlertClass {
     inputs.lengthUnit = inp[7].toLowerCase();
     inputs.alert_txt = inp[8].toString();
     inputs.textSize = inp[9].toLowerCase();
+    inputs.callback = inp[10];
 
     return inputs;
   }
@@ -246,14 +252,14 @@ class CustomAlertClass {
       return false;
     }
 
-    let id_location = false;
+    let id_location = null;
     for (let i = 0; i < this.alert_ids.length; i++) {
       if (alert_id === this.alert_ids[i]) {
         id_location = i;
       }
     }
 
-    if (id_location === false) {
+    if (id_location === null) {
       console.error('could not find an alert with id ' + alert_id + ', please check for spelling errors');
       return false;
     }
@@ -274,6 +280,8 @@ class CustomAlertClass {
 
     window.setTimeout(()=>{document.getElementById('ca-main').remove()}, 200);
     this.active = false;
+
+    this.alerts[index].params.callback(result);
   }
 
   getResult = (alert_id) => {
@@ -358,11 +366,6 @@ class CustomAlertClass {
 
     return [true];
   }
-}
-
-const test = () => {
-  customAlert.new([25, 25], [37.5, 10], "#c28af0", "111", ['yes', 'no', 'huh?'], true, 'test-1', '%', 'This is a test alert?', '1em');
-  customAlert.alert('test-1');
 }
 
 customAlert = new CustomAlertClass();
