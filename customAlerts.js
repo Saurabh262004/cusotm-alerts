@@ -283,7 +283,9 @@ class CustomAlertClass {
     window.setTimeout(()=>{document.getElementById('ca-main').remove()}, 200);
     this.active = false;
 
-    this.alerts[index].params.callback(result);
+    if (this.alerts[index].params.callback) {
+      this.alerts[index].params.callback(result);
+    }
   }
 
   getResult = (alert_id) => {
